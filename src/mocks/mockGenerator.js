@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import UserModel from '../models/user.model.js';
-import ProductModel from '../models/product.model.js';
+// import UserModel from '../models/user.model.js';
+// import ProductModel from '../models/product.model.js';
 
 export async function generateUsers(n) {
     const users = [];

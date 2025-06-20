@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import logger from 'morgan';
+// import logger from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { conectDB, configObject } from './config/index.js';
@@ -12,13 +12,16 @@ import passport from 'passport';
 import { initializePassport } from './config/passport.config.js'
 import mocksRouter from './routes/api/mocks.router.js';
 import logger from './config/logger.js';
-import { UserRouter } from './routes/api/user.router.js';
+import  { UserRouter } from './routes/api/user.router.js';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpecs } from './docs/swagger.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app  = express()
 // const PORT = configObject.port
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
@@ -44,11 +47,8 @@ app.use('/api/mocks', mocksRouter);
 app.use((err, req, res, next) => {
     logger.error(err.stack);
     res.status(500).send('Algo salió mal');});
-const userRouter = Router();
-userRouter.get('/', (req, res) => {
-    res.send('Ruta de usuarios funcionando');
-});
-app.use('/api/users', userRouter);
+
+app.use('/api/users', UserRouter);
 
 // app.use('/api/products', productsRouter)
 // app.use('/api/carts', ()=>{})
@@ -59,3 +59,5 @@ app.use('/api/users', userRouter);
 app.listen(configObject.port , ()=>{
     console.log(`Server on port ${configObject.port}`)
 })
+
+export default app;

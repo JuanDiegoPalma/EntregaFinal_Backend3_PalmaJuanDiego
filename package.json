@@ -6,13 +6,17 @@
   "scripts": {
     "start": "nodemon src/app.js --mode production",
     "dev": "nodemon src/app.js --mode developer",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "build": "docker build -t entregafinal-palmajuan .",
+    "retag": "docker tag entregafinal-palmajuan:latest juandiegopalma/entregafinal-palmajuan:latest",
+    "push": "docker push juandiegopalma/entregafinal-palmajuan:latest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
     "bcrypt": "^5.1.1",
     "commander": "^13.1.0",
     "cookie-parser": "^1.4.7",
@@ -24,6 +28,15 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
-    "passport-jwt": "^4.0.1"
+    "passport-jwt": "^4.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.7.0",
+    "supertest": "^7.1.1"
   }
 }

@@ -14,8 +14,83 @@ const router = Router()
 const {
     register,
     login,
-    current
+    current,
 } = new SessionsController()
+
+/**
+ * @swagger
+ * /api/sessions/register:
+ *   post:
+ *     summary: Registra un nuevo usuario
+ *     tags:
+ *       - Sesiones
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               first_name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Usuario registrado exitosamente
+ *       400:
+ *         description: Datos inválidos o usuario ya existe
+ */
+/**
+ * @swagger
+ * /api/sessions/login:
+ *   post:
+ *     summary: Inicia sesión de usuario
+ *     tags:
+ *       - Sesiones
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Sesión iniciada correctamente
+ *       400:
+ *         description: Email o contraseña faltantes
+ *       401:
+ *         description: Usuario no existe o credenciales incorrectas
+ */
+
+/**
+ * @swagger
+ * /api/sessions/current:
+ *   get:
+ *     summary: Obtiene el usuario autenticado actual
+ *     tags:
+ *       - Sesiones
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Usuario autenticado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       401:
+ *         description: No autorizado
+ */
 
 router.post('/register', register)
 router.post('/login', login)
