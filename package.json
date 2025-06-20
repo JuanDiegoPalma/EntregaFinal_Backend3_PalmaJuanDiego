@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/app.js --mode production",
+    "start": "node src/app.js --mode production",
     "dev": "nodemon src/app.js --mode developer",
     "test": "mocha",
     "build": "docker build -t entregafinal-palmajuan .",
